@@ -17,7 +17,7 @@ public class SaveData
     public int[] inventoryItemIds; // JsonUtility likes arrays more than List<T>
     public string version = "1.0.0";
     public string savedAtIsoUtc;
-    
+
     public static SaveData FromPosition(Vector2 pos, string sceneName = "")
     {
         return new SaveData

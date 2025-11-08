@@ -11,7 +11,18 @@ public class BattleSystem : MonoBehaviour
     // Handles a basic attack from player
     public void PlayerAttack()
     {
+        if (enemy == null)
+        {
+            Debug.LogError("Enemy stats null");
+            return;
+        }
+        if (player == null)
+        {
+            Debug.LogError("Player stats null");
+            return;
+        }
         enemy.currentHP -= player.damage;
+        Debug.Log(player.damage);
         if (enemy.currentHP <= 0)
         {
             EndBattle(true);
@@ -34,6 +45,7 @@ public class BattleSystem : MonoBehaviour
         ui.UpdateUI();
         StartCoroutine(EnemyTurn());
         ui.UpdateUI();
+        Debug.Log("Enemy hit twice!");
     }
 
     // Handles player running from the battle
@@ -47,6 +59,8 @@ public class BattleSystem : MonoBehaviour
     {
         // does nothing for now <- will implement later
         Debug.Log("Item used");
+        StartCoroutine(EnemyTurn());
+        ui.UpdateUI();
     }
     //--------------------------------------------------------
 
@@ -58,6 +72,7 @@ public class BattleSystem : MonoBehaviour
         if (player.currentHP <= 0)
         {
             EndBattle(false);
+            player.currentHP = 0;
         }
         ui.UpdateUI();
     }

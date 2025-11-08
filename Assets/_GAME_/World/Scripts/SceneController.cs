@@ -5,6 +5,9 @@ public class SceneController : MonoBehaviour
 {
     public static SceneController Instance;
 
+    public enum SceneMode { Battle, Chest };
+    public static SceneMode nextMode;
+
     void Awake()
     {
         Instance = this;
@@ -13,7 +16,14 @@ public class SceneController : MonoBehaviour
 
     public void LoadBattle()
     {
-        SceneManager.LoadScene("Battle");
+        nextMode = SceneMode.Battle;
+        SceneManager.LoadScene("BattleChest");
+    }
+
+    public void LoadChest()
+    {
+        nextMode = SceneMode.Chest;
+        SceneManager.LoadScene("BattleChest");
     }
 
     public void ReturnToWorld()
