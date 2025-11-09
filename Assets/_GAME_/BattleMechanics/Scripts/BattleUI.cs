@@ -11,6 +11,15 @@ public class BattleUI : MonoBehaviour
 
     void Start()
     {
+        // Load saved stats
+        var data = SaveSystem.Load();
+        if (data != null)
+        {
+            playerStats.lvl = data.playerLevel;
+            playerStats.damage = data.playerDamage;
+            playerStats.maxHP = data.playerMaxHP;
+            playerStats.currentHP = data.playerCurrentHP;
+        }
         UpdateUI();
     }
 

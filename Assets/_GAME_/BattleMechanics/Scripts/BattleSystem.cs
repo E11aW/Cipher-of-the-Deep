@@ -11,18 +11,7 @@ public class BattleSystem : MonoBehaviour
     // Handles a basic attack from player
     public void PlayerAttack()
     {
-        if (enemy == null)
-        {
-            Debug.LogError("Enemy stats null");
-            return;
-        }
-        if (player == null)
-        {
-            Debug.LogError("Player stats null");
-            return;
-        }
         enemy.currentHP -= player.damage;
-        Debug.Log(player.damage);
         if (enemy.currentHP <= 0)
         {
             EndBattle(true);
@@ -81,6 +70,11 @@ public class BattleSystem : MonoBehaviour
     public void EndBattle(bool playerWon)
     {
         Debug.Log(playerWon ? "You win!" : "You lost");
+
+        // Save updated stats
+        var data = SaveData.FromStats(player);
+        SaveSystem.Save(data);
+
         SceneController.Instance.ReturnToWorld();
     }
 }

@@ -16,7 +16,20 @@ public static class SaveSystem
     {
         try
         {
-            var json = JsonUtility.ToJson(data, prettyPrint: true);
+            var existing = Load() ?? new SaveData();
+
+            // Merge save fields to avoid overwriting values
+            existing.UpdatePosition(new Vector2(data.posX, data.posY), data.scene);
+            if (!string.IsNullOrEmpty(data.playerName)) existing.UpdateStats(new Stats
+            {
+                name = data.playerName,
+                lvl = data.playerLevel,
+                damage = data.playerDamage,
+                maxHP = data.playerMaxHP,
+                currentHP = data.playerCurrentHP
+            });
+
+            var json = JsonUtility.ToJson(existing, true);
 
             // Ensure directory exists
             var dir = Path.GetDirectoryName(SavePath);

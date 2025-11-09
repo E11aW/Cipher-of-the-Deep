@@ -8,7 +8,9 @@ public class ChestUI : MonoBehaviour
     public void yesClick()
     {
         player.damage += item.modifier;
-        Debug.Log(player.damage);
+        // Save updated stats
+        var data = SaveData.FromStats(player);
+        SaveSystem.Save(data);
         SceneController.Instance.ReturnToWorld();
     }
 
