@@ -7,6 +7,6 @@ In Cipher of the Deep players start off by choosing one of three classes: knight
 ## Objective
 The main objective of Cipher of the Deep is to defeat the final boss, “The Dark Mage.”
 ## Mechanics
-* Movement: WASD for top-down exploration.
-* Combat: Turn-based encounters triggered on enemy interaction. Players choose among several attacks or defensive options.
-* Progression: Gain levels and gear by defeating enemies and finding loot throughout chests in the dungeon.
+* **Movement**: WASD for top-down exploration.
+* **Combat**: Turn-based encounters triggered on enemy interaction. Players choose among several attacks or defensive options.
+* **Progression**: Gain levels and gear by defeating enemies and finding loot throughout chests in the dungeon.
