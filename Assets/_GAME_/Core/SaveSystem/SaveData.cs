@@ -21,6 +21,7 @@ public class SaveData
 
     // --- Ready for future growth ---
     public int[] inventoryItemIds; // JsonUtility likes arrays more than List<T>
+    public string[] defeatedEnemies; // Track defeated enemies by ID
     public string version = "1.0.0";
     public string savedAtIsoUtc;
 
@@ -64,6 +65,36 @@ public class SaveData
         playerDamage = playerStats.damage;
         playerMaxHP = playerStats.maxHP;
         playerCurrentHP = playerStats.currentHP;
+        savedAtIsoUtc = DateTime.UtcNow.ToString("o");
+    }
+
+    // Check if an enemy has been defeated
+    public bool IsEnemyDefeated(string enemyId)
+    {
+        if (defeatedEnemies == null || string.IsNullOrEmpty(enemyId)) return false;
+        return System.Array.Exists(defeatedEnemies, id => id == enemyId);
+    }
+
+    // Add a defeated enemy to the list
+    public void AddDefeatedEnemy(string enemyId)
+    {        
+        // Initialize if needed
+        if (defeatedEnemies == null)
+        {
+            defeatedEnemies = new string[] { enemyId };
+            savedAtIsoUtc = DateTime.UtcNow.ToString("o");
+            return;
+        }
+        
+        // Check if already defeated
+        if (IsEnemyDefeated(enemyId)) return;
+        
+        // Add to array
+        var newArray = new string[defeatedEnemies.Length + 1];
+        defeatedEnemies.CopyTo(newArray, 0);
+        newArray[defeatedEnemies.Length] = enemyId;
+        defeatedEnemies = newArray;
+        
         savedAtIsoUtc = DateTime.UtcNow.ToString("o");
     }
 

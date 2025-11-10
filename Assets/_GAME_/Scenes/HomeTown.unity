@@ -1103,6 +1103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EncounterTrigger
   triggerType: 0
   enemyName: test
+  enemyID: 123
   chestContents: {fileID: 0}
 --- !u!61 &573011853
 BoxCollider2D:
@@ -3471,6 +3472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EncounterTrigger
   triggerType: 1
   enemyName: test
+  enemyID: 
   chestContents: {fileID: 0}
 --- !u!61 &1586670636
 BoxCollider2D:

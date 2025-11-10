@@ -28,6 +28,12 @@ public static class SaveSystem
                 maxHP = data.playerMaxHP,
                 currentHP = data.playerCurrentHP
             });
+            
+            // Preserve defeated enemies if present in new data
+            if (data.defeatedEnemies != null && data.defeatedEnemies.Length > 0)
+            {
+                existing.defeatedEnemies = data.defeatedEnemies;
+            }
 
             var json = JsonUtility.ToJson(existing, true);
 

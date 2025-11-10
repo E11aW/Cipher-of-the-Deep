@@ -48,7 +48,12 @@ public class Charactar_Controller : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveNow();
+        SaveSystem.Delete();
+    }
+
+    private void OnDestroy()
+    {
+        SaveSystem.Delete();
     }
 
     private void SaveNow()

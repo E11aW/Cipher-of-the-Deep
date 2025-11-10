@@ -20,6 +20,7 @@ public class SceneLoaderButton : MonoBehaviour
 
     public void EndGame()
     {
+        SaveSystem.Delete();        
         Application.Quit();
     }
 }
