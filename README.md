@@ -10,3 +10,5 @@ The main objective of Cipher of the Deep is to defeat the final boss, “The Dar
 * **Movement**: WASD for top-down exploration.
 * **Combat**: Turn-based encounters triggered on enemy interaction. Players choose among several attacks or defensive options.
 * **Progression**: Gain levels and gear by defeating enemies and finding loot throughout chests in the dungeon.
+
+Adding this for PR Request
