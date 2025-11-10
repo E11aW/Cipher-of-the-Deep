@@ -9,6 +9,7 @@ public class Charactar_Controller : MonoBehaviour
 
     [Header("Dependencies")]
     [SerializeField] Rigidbody2D _rb;
+    [SerializeField] GameObject _pauseMenuUI;
     #endregion
 
     #region Internal Data
@@ -47,7 +48,12 @@ public class Charactar_Controller : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        SaveNow();
+        SaveSystem.Delete();
+    }
+
+    private void OnDestroy()
+    {
+        SaveSystem.Delete();
     }
 
     private void SaveNow()
@@ -60,9 +66,25 @@ public class Charactar_Controller : MonoBehaviour
     }
 
     private void GatherInput()
-    {
+    {   
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+        {
+            TogglePauseMenu();
+        }
+
         _moveDir.x = Input.GetAxisRaw("Horizontal");
         _moveDir.y = Input.GetAxisRaw("Vertical");
+    }
+
+    public void TogglePauseMenu()
+    {
+        if (_pauseMenuUI != null)
+        {
+            bool isActive = _pauseMenuUI.activeSelf;
+            _pauseMenuUI.SetActive(!isActive);
+            
+            Time.timeScale = isActive ? 1f : 0f;
+        }
     }
 
     private void MovementUpdate()
