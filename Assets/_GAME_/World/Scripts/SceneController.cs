@@ -17,17 +17,17 @@ public class SceneController : MonoBehaviour
     public void LoadBattle()
     {
         nextMode = SceneMode.Battle;
-        SceneManager.LoadScene("BattleChest");
+        SceneManager.LoadScene("BattleScene");
     }
 
     public void LoadChest()
     {
         nextMode = SceneMode.Chest;
-        SceneManager.LoadScene("BattleChest");
+        SceneManager.LoadScene("ChestScene");
     }
 
     public void ReturnToWorld()
     {
-        SceneManager.LoadScene("HomeTown");
+        SceneManager.LoadScene("MainScene");
     }
 }
