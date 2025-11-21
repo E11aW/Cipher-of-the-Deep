@@ -19,15 +19,16 @@ public static class SaveSystem
             var existing = Load() ?? new SaveData();
 
             // Merge save fields to avoid overwriting values
-            existing.UpdatePosition(new Vector2(data.posX, data.posY), data.scene);
-            if (!string.IsNullOrEmpty(data.playerName)) existing.UpdateStats(new Stats
+            if (data.posX != null) existing.UpdatePosition(new Vector2(data.posX, data.posY), data.scene);
+            if (data.playerMaxHP > 0)
             {
-                name = data.playerName,
-                lvl = data.playerLevel,
-                damage = data.playerDamage,
-                maxHP = data.playerMaxHP,
-                currentHP = data.playerCurrentHP
-            });
+                existing.playerName = data.playerName;
+                existing.playerLevel = data.playerLevel;
+                existing.playerDamage = data.playerDamage;
+                existing.playerMaxHP = data.playerMaxHP;
+                existing.playerCurrentHP = data.playerCurrentHP;
+            }
+            ;
 
             // Preserve defeated enemies if present in new data
             if (data.defeatedEnemies != null && data.defeatedEnemies.Length > 0)
