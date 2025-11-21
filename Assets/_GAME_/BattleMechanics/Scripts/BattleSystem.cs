@@ -5,13 +5,24 @@ public class BattleSystem : MonoBehaviour
     public BattleUI ui;
     public Stats player;
     public Stats enemy;
-    
+
     private string currentEnemyID;
 
     void Start()
     {
         // Get the enemy ID passed from the encounter trigger
         currentEnemyID = PlayerPrefs.GetString("CurrentEnemyID", "");
+
+        // Load saved stats
+        var data = SaveSystem.Load();
+        Debug.Log(data);
+        if (data != null)
+        {
+            player.lvl = data.playerLevel;
+            player.damage = data.playerDamage;
+            player.maxHP = data.playerMaxHP;
+            player.currentHP = data.playerCurrentHP;
+        }
     }
 
     //------------------All player Options---------------------
@@ -79,7 +90,7 @@ public class BattleSystem : MonoBehaviour
     {
         // Load existing save data (or create new if none exists)
         var data = SaveSystem.Load() ?? new SaveData();
-        
+
         // Update player stats
         data.UpdateStats(player);
 

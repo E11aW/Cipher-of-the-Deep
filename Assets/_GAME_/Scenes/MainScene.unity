@@ -1102,8 +1102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EncounterTrigger
   triggerType: 0
-  enemyName: test
-  enemyID: 123
+  ID: 101
   chestContents: {fileID: 0}
 --- !u!61 &573011853
 BoxCollider2D:
@@ -3451,6 +3450,7 @@ GameObject:
   - component: {fileID: 1586670637}
   - component: {fileID: 1586670636}
   - component: {fileID: 1586670635}
+  - component: {fileID: 1586670638}
   m_Layer: 0
   m_Name: Chest
   m_TagString: Untagged
@@ -3471,8 +3471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EncounterTrigger
   triggerType: 1
-  enemyName: test
-  enemyID: 
+  ID: 001
   chestContents: {fileID: 0}
 --- !u!61 &1586670636
 BoxCollider2D:
@@ -3536,6 +3535,19 @@ Transform:
   - {fileID: 1238792587}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1586670638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586670634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c6bc83b3110504a8d2765914389a1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OpenChest
+  openedChest: {fileID: -836866867, guid: 10c8cba13f2784c7b8b6700fb445a83b, type: 3}
 --- !u!1 &1658246067
 GameObject:
   m_ObjectHideFlags: 0

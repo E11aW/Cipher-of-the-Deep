@@ -22,6 +22,7 @@ public class SaveData
     // --- Ready for future growth ---
     public int[] inventoryItemIds; // JsonUtility likes arrays more than List<T>
     public string[] defeatedEnemies; // Track defeated enemies by ID
+    public string[] openedChests; // Track all opened chests by ID
     public string version = "1.0.0";
     public string savedAtIsoUtc;
 
@@ -69,32 +70,61 @@ public class SaveData
     }
 
     // Check if an enemy has been defeated
-    public bool IsEnemyDefeated(string enemyId)
+    public bool IsEnemyDefeated(string enemyID)
     {
-        if (defeatedEnemies == null || string.IsNullOrEmpty(enemyId)) return false;
-        return System.Array.Exists(defeatedEnemies, id => id == enemyId);
+        if (defeatedEnemies == null || string.IsNullOrEmpty(enemyID)) return false;
+        return System.Array.Exists(defeatedEnemies, id => id == enemyID);
     }
 
     // Add a defeated enemy to the list
-    public void AddDefeatedEnemy(string enemyId)
-    {        
+    public void AddDefeatedEnemy(string enemyID)
+    {
         // Initialize if needed
         if (defeatedEnemies == null)
         {
-            defeatedEnemies = new string[] { enemyId };
+            defeatedEnemies = new string[] { enemyID };
             savedAtIsoUtc = DateTime.UtcNow.ToString("o");
             return;
         }
-        
+
         // Check if already defeated
-        if (IsEnemyDefeated(enemyId)) return;
-        
+        if (IsEnemyDefeated(enemyID)) return;
+
         // Add to array
         var newArray = new string[defeatedEnemies.Length + 1];
         defeatedEnemies.CopyTo(newArray, 0);
-        newArray[defeatedEnemies.Length] = enemyId;
+        newArray[defeatedEnemies.Length] = enemyID;
         defeatedEnemies = newArray;
-        
+
+        savedAtIsoUtc = DateTime.UtcNow.ToString("o");
+    }
+
+    // Check if a chest has already been opened
+    public bool IsChestOpened(string chestID)
+    {
+        if (openedChests == null || string.IsNullOrEmpty(chestID)) return false;
+        return System.Array.Exists(openedChests, id => id == chestID);
+    }
+
+    // Add an open chest to the list
+    public void AddOpenedChest(string chestID)
+    {
+        // Initialize if needed
+        if (openedChests == null)
+        {
+            openedChests = new string[] { chestID };
+            savedAtIsoUtc = DateTime.UtcNow.ToString("o");
+            return;
+        }
+        // Check if chest was already opened
+        if (IsChestOpened(chestID)) return;
+
+        // Add to array
+        var newArray = new string[openedChests.Length + 1];
+        openedChests.CopyTo(newArray, 0);
+        newArray[openedChests.Length] = chestID;
+        openedChests = newArray;
+
         savedAtIsoUtc = DateTime.UtcNow.ToString("o");
     }
 
