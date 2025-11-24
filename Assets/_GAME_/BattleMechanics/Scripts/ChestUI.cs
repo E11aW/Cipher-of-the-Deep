@@ -6,10 +6,18 @@ public class ChestUI : MonoBehaviour
     public Item item;
     private string currentChestID;
 
+     AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     void Start()
     {
         // Get the chest ID passed from the encounter trigger
         currentChestID = PlayerPrefs.GetString("CurrentChestID", "");
+        audioManager.PlaySFX(audioManager.chest);
     }
 
     public void yesClick()
