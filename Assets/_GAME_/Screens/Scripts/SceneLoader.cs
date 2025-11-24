@@ -10,6 +10,23 @@ public class SceneLoaderButton : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            if (audioManager != null)
+            {
+                audioManager.Play("Button Press");
+                
+                if (sceneToLoad == "HomeTown")
+                {
+                    audioManager.Stop("Title");
+                    audioManager.Play("Theme");
+                }
+                else if (sceneToLoad == "MainMenuScreen")
+                {
+                    audioManager.Stop("Theme");
+                    audioManager.Play("Title");
+                }
+            }
+            
             SceneManager.LoadScene(sceneToLoad);
         }
         else
@@ -20,6 +37,12 @@ public class SceneLoaderButton : MonoBehaviour
 
     public void EndGame()
     {
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.Stop("ButtonPress");
+        }
+
         SaveSystem.Delete();        
         Application.Quit();
     }

@@ -483,6 +483,131 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &427172721
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 254.83475
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 234.29459
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5544133450150017022, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[1].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0686945c7e21daa4cac40157f5a25ec2, type: 3}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[4].name
+      value: Button Press
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b97fb4dbca4f6a48b596c92c6f21c57, type: 3}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[5].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[5].name
+      value: Title
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1b97fb4dbca4f6a48b596c92c6f21c57, type: 3}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[6].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[6].name
+      value: DoorOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[4].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[4].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[5].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6699938204114437771, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: sounds.Array.data[6].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8674758945609390875, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c197df5be12d2d9479bb8431237af7a2, type: 3}
 --- !u!1 &681621075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,3 +1705,4 @@ SceneRoots:
   - {fileID: 1919373018}
   - {fileID: 1081796423}
   - {fileID: 141128649}
+  - {fileID: 427172721}
