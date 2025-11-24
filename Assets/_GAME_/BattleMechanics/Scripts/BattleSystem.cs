@@ -20,11 +20,19 @@ public class BattleSystem : MonoBehaviour
     public void PlayerAttack()
     {
         enemy.currentHP -= player.damage;
+
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.Play("Hit");
+        }
+
         if (enemy.currentHP <= 0)
         {
             EndBattle(true);
             return;
         }
+
         StartCoroutine(EnemyTurn());
         ui.UpdateUI();
     }
@@ -66,6 +74,13 @@ public class BattleSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         player.currentHP -= enemy.damage;
+
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.Play("Hit");
+        }
+
         if (player.currentHP <= 0)
         {
             EndBattle(false);

@@ -17,6 +17,12 @@ public class SceneController : MonoBehaviour
     public void LoadBattle()
     {
         nextMode = SceneMode.Battle;
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.Stop("Theme");
+            audioManager.Play("Combat");
+        }
         SceneManager.LoadScene("BattleChest");
     }
 
@@ -28,6 +34,11 @@ public class SceneController : MonoBehaviour
 
     public void ReturnToWorld()
     {
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.Stop("Theme");
+        }
         SceneManager.LoadScene("HomeTown");
     }
 }

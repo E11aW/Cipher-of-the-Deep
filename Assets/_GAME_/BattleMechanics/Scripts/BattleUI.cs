@@ -11,6 +11,8 @@ public class BattleUI : MonoBehaviour
 
     void Start()
     {
+
+
         // Load saved stats
         var data = SaveSystem.Load();
         if (data != null)
