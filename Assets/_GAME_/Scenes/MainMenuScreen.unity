@@ -1308,6 +1308,7 @@ GameObject:
   - component: {fileID: 1419294584}
   - component: {fileID: 1419294583}
   - component: {fileID: 1419294582}
+  - component: {fileID: 1419294586}
   m_Layer: 5
   m_Name: Start Button
   m_TagString: Untagged
@@ -1342,12 +1343,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419294580}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f49080185b272324bb7e4e7fabac5b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoaderButton
-  sceneToLoad: HomeTown
+  sceneToLoad: MainScene
 --- !u!114 &1419294583
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1392,9 +1393,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1419294582}
-        m_TargetAssemblyTypeName: SceneLoaderButton, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 1419294586}
+        m_TargetAssemblyTypeName: ScrollingText, Assembly-CSharp
+        m_MethodName: ActiveText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1442,6 +1443,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1419294580}
   m_CullTransparentMesh: 1
+--- !u!114 &1419294586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419294580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30cf7396bc74a41629672967710e70b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScrollingText
+  gameStart:
+  - Cipher of the Deep
+  textSpeed: 0.5
+  gameStartText: {fileID: 1184167611}
+  nextSceneName: MainScene
 --- !u!1 &1919373015
 GameObject:
   m_ObjectHideFlags: 0
