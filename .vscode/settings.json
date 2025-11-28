@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Cipher of the Deep.sln"
+    "dotnet.defaultSolution": "Cipher-of-the-Deep.sln"
 }

@@ -6,6 +6,7 @@ public class OpenChest : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private string currentChestID;
 
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
