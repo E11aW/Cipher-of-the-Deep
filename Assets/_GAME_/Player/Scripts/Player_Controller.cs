@@ -10,6 +10,7 @@ public class Charactar_Controller : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] Rigidbody2D _rb;
     [SerializeField] GameObject _pauseMenuUI;
+    [SerializeField] SpriteRenderer _visualsRenderer;
     #endregion
 
     #region Internal Data
@@ -66,7 +67,7 @@ public class Charactar_Controller : MonoBehaviour
     }
 
     private void GatherInput()
-    {   
+    {
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
         {
             TogglePauseMenu();
@@ -82,14 +83,18 @@ public class Charactar_Controller : MonoBehaviour
         {
             bool isActive = _pauseMenuUI.activeSelf;
             _pauseMenuUI.SetActive(!isActive);
-            
+
             Time.timeScale = isActive ? 1f : 0f;
         }
     }
 
     private void MovementUpdate()
     {
-        // If your Unity doesn't have linearVelocity, use _rb.velocity
+        // Sprite Flipping
+        if (_moveDir.x < 0) _visualsRenderer.flipX = true;
+        else if (_moveDir.x > 0) _visualsRenderer.flipX = false;
+
+        // Movement
         if (_rb != null)
             _rb.linearVelocity = _moveDir * _moveSpeed * Time.fixedDeltaTime;
         else
