@@ -15,6 +15,8 @@ public class Charactar_Controller : MonoBehaviour
 
     #region Internal Data
     private Vector2 _moveDir = Vector2.zero;
+    private float _nextStepTime = 0f;
+    private float _stepInterval = 0.75f; // seconds between steps
     #endregion
 
     // -------------------- NEW: LOAD on start --------------------
@@ -29,6 +31,9 @@ public class Charactar_Controller : MonoBehaviour
             else
                 transform.position = new Vector3(pos.x, pos.y, transform.position.z);
         }
+
+        FindObjectOfType<AudioManager>().Play("Theme");
+        FindObjectOfType<AudioManager>().Stop("Combat");
     }
 
     private void Update()
@@ -96,9 +101,26 @@ public class Charactar_Controller : MonoBehaviour
 
         // Movement
         if (_rb != null)
+        {
             _rb.linearVelocity = _moveDir * _moveSpeed * Time.fixedDeltaTime;
+        }
         else
+        {
             transform.position += (Vector3)(_moveDir * _moveSpeed * Time.fixedDeltaTime);
+        }
+
+        if (_moveDir != Vector2.zero)
+        {
+            if (Time.time >= _nextStepTime)
+            {
+                FindObjectOfType<AudioManager>().Play("Stepping");
+                _nextStepTime = Time.time + _stepInterval;
+            }
+        }
+        else
+        {
+            _nextStepTime = Time.time;
+        }
     }
 
     // Handy for testing (Right-click component header -> “Reset Saved Position”)

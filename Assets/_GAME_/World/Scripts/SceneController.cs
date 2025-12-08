@@ -21,7 +21,13 @@ public class SceneController : MonoBehaviour
     }
 
     public void LoadChest()
-    {
+    { 
+        AudioManager audioManager = FindObjectOfType<AudioManager>();
+        if (audioManager != null)
+        {
+            audioManager.Play("DoorOpen");
+        }
+        
         nextMode = SceneMode.Chest;
         SceneManager.LoadScene("ChestScene");
     }

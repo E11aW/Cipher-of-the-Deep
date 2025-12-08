@@ -9,6 +9,12 @@ public class SceneChangeOnCollision : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
+            AudioManager audioManager = FindObjectOfType<AudioManager>();
+            if (audioManager != null)
+            {
+                audioManager.Play("DoorOpen");
+            }
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }
