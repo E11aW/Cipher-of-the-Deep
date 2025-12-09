@@ -34,7 +34,16 @@ public class BattleSystemNew : MonoBehaviour
         GameObject playerGO = Instantiate(playerPrefab, playerBattleStation);
         playerUnit = playerGO.GetComponent<Unit>();
 
-        GameObject enemyGO = Instantiate(enemyPrefab, enemyBattleStation);
+        var data = SaveSystem.Load();
+        Debug.Log(data);
+        if (data != null)
+        {
+            playerUnit.damage = data.playerDamage;
+            playerUnit.maxHP = data.playerMaxHP;
+            playerUnit.currentHP = data.playerCurrentHP;
+        }
+
+        GameObject enemyGO = Instantiate(BattleManager.Instance.enemyPrefabToBattle, enemyBattleStation);
         enemyUnit = enemyGO.GetComponent<Unit>();
 
         enemyUnit.currentEnemyID = PlayerPrefs.GetString("CurrentEnemyID", "");
@@ -52,43 +61,145 @@ public class BattleSystemNew : MonoBehaviour
 
     IEnumerator PlayerAttack()
     {
-        bool isDead = enemyUnit.TakeDamage(playerUnit.damage);
+        float roll = Random.Range(0f, 1f);
 
-        enemyHUD.SetHP(enemyUnit.currentHP);
-        dialogueText.text = "The attack is successful!";
-
-        yield return new WaitForSeconds(2f);
-
-        if (isDead)
+        if (roll > playerUnit.missChance)
         {
-            state = BattleState.WON;
-            StartCoroutine(EndBattle());
+            int damage = playerUnit.damage;
+            int critBonus = 1;
+            
+            if (playerUnit.isCharged)
+            {
+                dialogueText.text = "You hit extra hard!";
+
+                damage = playerUnit.chargeDamage;
+                critBonus = 2;
+
+                yield return new WaitForSeconds(1f);
+
+                playerUnit.isCharged = false;
+            }
+
+            roll = Random.Range(0f, 1f);
+
+            if (roll <= playerUnit.critChance * critBonus)
+            {
+                damage *= playerUnit.critMultiplier;
+
+                dialogueText.text = "Critical hit!";   
+            }
+            else
+            {
+                dialogueText.text = "The attack is successful!";   
+            }
+
+            bool isDead = enemyUnit.TakeDamage(damage);
+
+            enemyHUD.SetHP(enemyUnit.currentHP);
+
+            yield return new WaitForSeconds(2f);
+
+            if (isDead)
+            {
+                state = BattleState.WON;
+                StartCoroutine(EndBattle());
+            } else
+            {
+                state = BattleState.ENEMYTURN;
+                EnemyTurn();
+            }
         } else
         {
+            dialogueText.text = "The attack missed!";
+            playerUnit.isCharged = false;
+
+            yield return new WaitForSeconds(2f);
+
             state = BattleState.ENEMYTURN;
-            StartCoroutine(EnemyTurn());
+            EnemyTurn();
         }
     }
 
-    IEnumerator EnemyTurn()
+    public void EnemyTurn()
     {
-        // Make enemy decision tree.
+        float roll = Random.Range(0f, 1f); // roll between 0 and 1
+
+        if (roll <= enemyUnit.enemyAttackChance)
+        {
+            StartCoroutine(EnemyAttack());
+        }
+        else if (roll <= enemyUnit.enemyAttackChance + enemyUnit.enemyHealChance)
+        {
+            StartCoroutine(EnemyHeal());
+        }
+        else if (roll <= enemyUnit.enemyAttackChance + enemyUnit.enemyHealChance + enemyUnit.enemyChargeChance)
+        {
+            StartCoroutine(EnemyCharge());
+        }
+        else
+        {
+            StartCoroutine(EnemyPause());
+        }
+    }
+
+    IEnumerator EnemyAttack()
+    {
         dialogueText.text = enemyUnit.unitName + " attacks!";
 
         yield return new WaitForSeconds(1f);
 
-        bool isDead = playerUnit.TakeDamage(enemyUnit.damage);
+        float roll = Random.Range(0f, 1f);
 
-        playerHUD.SetHP(playerUnit.currentHP);
+        if (roll > enemyUnit.missChance)
+        { 
+            int damage = enemyUnit.damage;
+            int critBonus = 1;
+            
+            if (enemyUnit.isCharged)
+            {
+                dialogueText.text = enemyUnit.unitName + " hit extra hard!";
 
-        yield return new WaitForSeconds(1f);
+                damage = enemyUnit.chargeDamage;
+                critBonus = 2;
 
-        if (isDead)
+                yield return new WaitForSeconds(1f);
+
+                enemyUnit.isCharged = false;
+            }
+
+            roll = Random.Range(0f, 1f);
+
+            if (roll <= enemyUnit.critChance * critBonus)
+            {
+                damage *= enemyUnit.critMultiplier;
+
+                dialogueText.text = "Critical hit!";
+            }
+
+            bool isDead = playerUnit.TakeDamage(damage);
+
+            playerHUD.SetHP(playerUnit.currentHP);
+
+            yield return new WaitForSeconds(1f);
+
+            if (isDead)
+            {
+                state = BattleState.LOST;
+                StartCoroutine(EndBattle());
+            } else
+            {
+                state = BattleState.PLAYERTURN;
+                PlayerTurn();
+            }
+        }
+        else
         {
-            state = BattleState.LOST;
-            EndBattle();
-        } else
-        {
+            dialogueText.text = enemyUnit.unitName + " missed!";
+
+            yield return new WaitForSeconds(2f);
+
+            enemyUnit.isCharged = false;
+
             state = BattleState.PLAYERTURN;
             PlayerTurn();
         }
@@ -96,8 +207,6 @@ public class BattleSystemNew : MonoBehaviour
 
     IEnumerator EndBattle()
     {
-        Debug.Log("Hello");
-
         if (state == BattleState.WON)
         {
             dialogueText.text = "You won the battle!";
@@ -126,6 +235,67 @@ public class BattleSystemNew : MonoBehaviour
         dialogueText.text = "Choose an action:";
     }
 
+    IEnumerator PlayerHeal()
+    {
+        playerUnit.Heal(playerUnit.healAmount);
+        
+        playerHUD.SetHP(playerUnit.currentHP);
+        dialogueText.text = "You heal for " + playerUnit.healAmount + "hp";
+
+        yield return new WaitForSeconds(2f);
+
+        playerUnit.isCharged = false;
+        state = BattleState.ENEMYTURN;
+        EnemyTurn();
+    }
+
+    IEnumerator EnemyHeal()
+    {
+        enemyUnit.Heal(enemyUnit.healAmount);
+        
+        enemyHUD.SetHP(enemyUnit.currentHP);
+        dialogueText.text = enemyUnit.unitName + " healed for " + enemyUnit.healAmount + "hp";
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
+
+    IEnumerator PlayerCharge()
+    {
+        playerUnit.isCharged = true;
+
+        dialogueText.text = "You charge up!";
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.ENEMYTURN;
+        EnemyTurn();
+    }
+
+    IEnumerator EnemyCharge()
+    {
+        enemyUnit.isCharged = true;
+
+        dialogueText.text = enemyUnit.unitName + " charged up!";
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
+
+    IEnumerator EnemyPause()
+    {
+        dialogueText.text = enemyUnit.unitName + " is pausing...";
+
+        yield return new WaitForSeconds(2f);
+
+        state = BattleState.PLAYERTURN;
+        PlayerTurn();
+    }
+
     public void OnAttackButton()
     {   
         if (state != BattleState.PLAYERTURN)
@@ -134,7 +304,41 @@ public class BattleSystemNew : MonoBehaviour
         }
 
         state = BattleState.ENEMYTURN;
-
         StartCoroutine(PlayerAttack());
+    }
+
+    public void OnHealButton()
+    {   
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(PlayerHeal());
+    }
+
+    public void OnChargeButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        state = BattleState.ENEMYTURN;
+        StartCoroutine(PlayerCharge());
+    }
+
+    public void OnRunButton()
+    {
+        if (state != BattleState.PLAYERTURN)
+        {
+            return;
+        }
+
+        dialogueText.text = "You ran away!";
+        state = BattleState.ENEMYTURN;
+
+        StartCoroutine(EndBattle());
     }
 }

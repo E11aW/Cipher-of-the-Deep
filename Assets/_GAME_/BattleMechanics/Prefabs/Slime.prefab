@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3760726281152240537}
   - component: {fileID: 7061887026796295493}
+  - component: {fileID: 5502852509159101377}
+  - component: {fileID: 4119024254568065482}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,11 +47,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6011f47dd605ca4abbebfafe1947908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  unitName: Pumpkin
-  damage: 2
+  unitName: Slime
+  currentEnemyID: 
   maxHP: 10
   currentHP: 10
-  currentEnemyID: 
+  damage: 2
+  defense: 0
+  chargeDamage: 0
+  healAmount: 1
+  isCharged: 0
+  critChance: 0.1
+  critMultiplier: 2
+  missChance: 0.1
+  enemyAttackChance: 0.5
+  enemyHealChance: 0.5
+  enemyChargeChance: 0
+--- !u!61 &5502852509159101377
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322548007506078314}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &4119024254568065482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1322548007506078314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebaa157116588a488d01c5fb0769f84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EncounterTrigger
+  triggerType: 0
+  ID: 
+  chestContents: {fileID: 0}
+  enemyPrefab: {fileID: 1322548007506078314}
 --- !u!1 &7955137778115792687
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,7 +135,7 @@ GameObject:
   - component: {fileID: 6873437454078773126}
   - component: {fileID: 5772760072747864872}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126,10 +200,10 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -892654853
+  m_SortingLayer: 5
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1392258381, guid: 10c8cba13f2784c7b8b6700fb445a83b, type: 3}
+  m_Sprite: {fileID: 50350244386731941, guid: 10c8cba13f2784c7b8b6700fb445a83b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -46,10 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   unitName: Hero
-  damage: 2
+  currentEnemyID: 
   maxHP: 10
   currentHP: 10
-  currentEnemyID: 
+  damage: 2
+  defense: 0
+  chargeDamage: 5
+  healAmount: 3
+  isCharged: 0
+  critChance: 0.1
+  critMultiplier: 2
+  missChance: 0.1
+  enemyAttackChance: 0
+  enemyHealChance: 0
+  enemyChargeChance: 0
 --- !u!1 &3735402607124848058
 GameObject:
   m_ObjectHideFlags: 0
