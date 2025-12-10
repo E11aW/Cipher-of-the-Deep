@@ -23,7 +23,6 @@ public static class SaveSystem
             if (data.playerMaxHP > 0)
             {
                 existing.playerName = data.playerName;
-                existing.playerLevel = data.playerLevel;
                 existing.playerDamage = data.playerDamage;
                 existing.playerMaxHP = data.playerMaxHP;
                 existing.playerCurrentHP = data.playerCurrentHP;
