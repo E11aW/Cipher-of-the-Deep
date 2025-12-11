@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [SelectionBase]
@@ -18,16 +20,29 @@ public class Charactar_Controller : MonoBehaviour
     #endregion
 
     // -------------------- NEW: LOAD on start --------------------
-    private void Awake()
+    private void Start()
     {
+        StartCoroutine(SpawnPlayer());
+    }
+
+    IEnumerator SpawnPlayer()
+    {
+        yield return null;
         var data = SaveSystem.Load();
         if (data != null)
         {
-            var pos = data.ToVector2();
-            if (_rb != null)
-                _rb.position = pos; // physics-safe
-            else
-                transform.position = new Vector3(pos.x, pos.y, transform.position.z);
+            Vector2 savedPos = new Vector2(data.posX, data.posY);
+            Collider2D hit = Physics2D.OverlapCircle(savedPos, 0.5f);
+
+
+            if (hit != null)
+            {
+                Debug.Log("HIT");
+                Debug.Log(hit);
+                savedPos = new Vector2(data.checkpointX, data.checkpointY);
+            }
+
+            transform.position = savedPos;
         }
     }
 
@@ -48,11 +63,6 @@ public class Charactar_Controller : MonoBehaviour
     }
 
     private void OnApplicationQuit()
-    {
-        SaveSystem.Delete();
-    }
-
-    private void OnDestroy()
     {
         SaveSystem.Delete();
     }

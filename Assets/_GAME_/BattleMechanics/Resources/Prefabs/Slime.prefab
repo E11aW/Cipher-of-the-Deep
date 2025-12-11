@@ -49,8 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   unitName: Slime
   currentEnemyID: 
-  maxHP: 10
-  currentHP: 10
+  maxHP: 4
+  currentHP: 4
   damage: 2
   defense: 0
   chargeDamage: 0

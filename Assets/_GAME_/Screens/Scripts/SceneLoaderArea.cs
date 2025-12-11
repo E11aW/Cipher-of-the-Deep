@@ -9,6 +9,7 @@ public class SceneChangeOnCollision : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
+            SaveSystem.Delete();        
             SceneManager.LoadScene(sceneToLoad);
         }
     }

@@ -4,7 +4,7 @@ public class EncounterTrigger : MonoBehaviour
 {
     public enum TriggerType { Enemy, Chest }
     public TriggerType triggerType = TriggerType.Enemy;
-    public string ID = System.Guid.NewGuid().ToString();
+    public string ID;
 
     public GameObject chestContents;
     public GameObject enemyPrefab;
@@ -30,6 +30,13 @@ public class EncounterTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (triggered) return; // Avoid multiple triggers
+
+        // Save the player position
+        var data = SaveSystem.Load() ?? new SaveData();
+        Vector2 otherPos = other.transform.position;
+        data.UpdatePosition(otherPos, "Main");
+        SaveSystem.Save(data);
+
         if (other.CompareTag("Player"))
         {
             triggered = true;

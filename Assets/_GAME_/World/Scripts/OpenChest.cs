@@ -7,7 +7,7 @@ public class OpenChest : MonoBehaviour
     private string currentChestID;
 
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 

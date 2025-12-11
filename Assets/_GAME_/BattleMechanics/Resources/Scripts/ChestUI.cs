@@ -22,7 +22,7 @@ public class ChestUI : MonoBehaviour
     public void yesClick()
     {
         // Load stats
-        var data = SaveSystem.Load();
+        var data = SaveSystem.Load() ?? new SaveData();
 
         if (data == null)
         {
