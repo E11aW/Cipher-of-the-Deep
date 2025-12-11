@@ -8,8 +8,31 @@ public class SceneChangeOnCollision : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
-        {
-            SaveSystem.Delete();        
+        {            
+            var data = SaveSystem.Load();
+            data.scene = sceneToLoad;
+
+            if (sceneToLoad == "Level2")
+            {
+                data.posX = -6.35f;
+                data.posY = 2.77f;
+                data.checkpointX = -6.35f;
+                data.checkpointY = 2.77f;
+            }
+            else if (sceneToLoad == "Level3")
+            {
+                data.posX = -8.03f;
+                data.posY = -2.24f;
+                data.checkpointX = -8.03f;
+                data.checkpointY = -2.24f;
+            }
+            else if (sceneToLoad == "EndScreen")
+            {
+                SaveSystem.Delete();
+            }
+            
+            SaveSystem.Save(data);
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }

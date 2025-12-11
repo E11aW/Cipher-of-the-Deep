@@ -34,7 +34,6 @@ public class Charactar_Controller : MonoBehaviour
             Vector2 savedPos = new Vector2(data.posX, data.posY);
             Collider2D hit = Physics2D.OverlapCircle(savedPos, 0.5f);
 
-
             if (hit != null)
             {
                 Debug.Log("HIT");

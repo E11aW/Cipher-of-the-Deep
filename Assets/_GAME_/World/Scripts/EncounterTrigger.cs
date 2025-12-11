@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class EncounterTrigger : MonoBehaviour
 {
@@ -34,7 +36,7 @@ public class EncounterTrigger : MonoBehaviour
         // Save the player position
         var data = SaveSystem.Load() ?? new SaveData();
         Vector2 otherPos = other.transform.position;
-        data.UpdatePosition(otherPos, "Main");
+        data.UpdatePosition(otherPos, SceneManager.GetActiveScene().name);
         SaveSystem.Save(data);
 
         if (other.CompareTag("Player"))

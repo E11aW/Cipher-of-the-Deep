@@ -26,6 +26,8 @@ public static class SaveSystem
                 existing.playerDamage = data.playerDamage;
                 existing.playerMaxHP = data.playerMaxHP;
                 existing.playerCurrentHP = data.playerCurrentHP;
+                existing.checkpointX = data.checkpointX;
+                existing.checkpointY = data.checkpointY;
             }
             ;
 

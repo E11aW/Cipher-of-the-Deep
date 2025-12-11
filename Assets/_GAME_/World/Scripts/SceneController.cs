@@ -28,7 +28,8 @@ public class SceneController : MonoBehaviour
 
     public void ReturnToWorld()
     {   
-        SaveSystem.Load();
-        SceneManager.LoadScene("MainScene");
+        var data = SaveSystem.Load();
+
+        SceneManager.LoadScene(data.scene);
     }
 }
