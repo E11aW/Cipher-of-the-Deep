@@ -14,7 +14,6 @@ public class SaveData
 
     // --- Player stats ---
     public string playerName;
-    public int playerLevel;
     public int playerDamage;
     public int playerMaxHP;
     public int playerCurrentHP;
@@ -38,15 +37,14 @@ public class SaveData
         };
     }
 
-    public static SaveData FromStats(Stats playerStats)
+    public static SaveData FromStats(Unit playerUnit)
     {
         return new SaveData
         {
-            playerName = playerStats.name,
-            playerLevel = playerStats.lvl,
-            playerDamage = playerStats.damage,
-            playerMaxHP = playerStats.maxHP,
-            playerCurrentHP = playerStats.currentHP,
+            playerName = playerUnit.name,
+            playerDamage = playerUnit.damage,
+            playerMaxHP = playerUnit.maxHP,
+            playerCurrentHP = playerUnit.currentHP,
             savedAtIsoUtc = DateTime.UtcNow.ToString("o")
         };
     }
@@ -59,13 +57,12 @@ public class SaveData
         scene = sceneName;
         savedAtIsoUtc = DateTime.UtcNow.ToString("o");
     }
-    public void UpdateStats(Stats playerStats)
+    public void UpdateStats(Unit playerUnit)
     {
-        playerName = playerStats.name;
-        playerLevel = playerStats.lvl;
-        playerDamage = playerStats.damage;
-        playerMaxHP = playerStats.maxHP;
-        playerCurrentHP = playerStats.currentHP;
+        playerName = playerUnit.name;
+        playerDamage = playerUnit.damage;
+        playerMaxHP = playerUnit.maxHP;
+        playerCurrentHP = playerUnit.currentHP;
         savedAtIsoUtc = DateTime.UtcNow.ToString("o");
     }
 

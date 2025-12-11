@@ -4,8 +4,10 @@ public class EncounterTrigger : MonoBehaviour
 {
     public enum TriggerType { Enemy, Chest }
     public TriggerType triggerType = TriggerType.Enemy;
-    public string ID; // Unique identifier for this enemy/chest
+    public string ID = System.Guid.NewGuid().ToString();
+
     public GameObject chestContents;
+    public GameObject enemyPrefab;
 
     private bool triggered = false;
 
@@ -45,6 +47,7 @@ public class EncounterTrigger : MonoBehaviour
 
     void HandleEnemyEncounter()
     {
+        BattleManager.Instance.enemyPrefabToBattle = enemyPrefab;
         // Pass the enemy ID to the battle system via PlayerPrefs (temporary)
         if (!string.IsNullOrEmpty(ID))
         {

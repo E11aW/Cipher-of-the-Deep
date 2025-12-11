@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class ChestUI : MonoBehaviour
 {
-    public Stats player;
     public Item item;
     private string currentChestID;
 
-     AudioManager audioManager;
+    AudioManager audioManager;
 
     private void Awake()
     {
@@ -22,14 +21,19 @@ public class ChestUI : MonoBehaviour
 
     public void yesClick()
     {
-        player.damage += item.modifier;
+        // Load stats
+        var data = SaveSystem.Load();
 
-        // Save updated stats
-        var data = SaveSystem.Load() ?? new SaveData();
-        data.UpdateStats(player);
-        // Set chest as opened
+        if (data == null)
+        {
+            Debug.LogError("No save data found!");
+            return;
+        }
+        data.playerDamage += item.modifier;
+        // Set stats and chest
         data.AddOpenedChest(currentChestID);
         SaveSystem.Save(data);
+
         Debug.Log(currentChestID + " opened");
         SceneController.Instance.ReturnToWorld();
     }

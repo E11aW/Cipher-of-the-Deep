@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
-        if (sceneName == "MainScene")
+        if (sceneName == "MainScene" || sceneName == "Level2" || sceneName == "Level3")
         {
             musicSource.clip = background;
             musicSource.Play();
