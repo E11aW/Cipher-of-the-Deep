@@ -139,19 +139,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   unitName: Goblin
   currentEnemyID: 
-  maxHP: 10
-  currentHP: 10
-  damage: 2
+  maxHP: 15
+  currentHP: 15
+  damage: 3
   defense: 0
-  chargeDamage: 0
-  healAmount: 1
+  chargeDamage: 3
+  healAmount: 2
   isCharged: 0
   critChance: 0.1
   critMultiplier: 2
   missChance: 0.1
-  enemyAttackChance: 0.5
-  enemyHealChance: 0.5
-  enemyChargeChance: 0
+  enemyAttackChance: 0.33
+  enemyHealChance: 0.33
+  enemyChargeChance: 0.33
 --- !u!61 &7539775664489169418
 BoxCollider2D:
   m_ObjectHideFlags: 0

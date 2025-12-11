@@ -1281,7 +1281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f49080185b272324bb7e4e7fabac5b26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoaderButton
-  sceneToLoad: HomeTown
+  sceneToLoad: MainScene
 --- !u!1 &1927606605
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,8 @@ public class SceneLoaderButton : MonoBehaviour
     [SerializeField] private string sceneToLoad;
 
     public void LoadScene()
-    {
+    {   
+        Debug.Log(sceneToLoad);
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
             SceneManager.LoadScene(sceneToLoad);

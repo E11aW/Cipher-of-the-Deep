@@ -18,6 +18,8 @@ public class SceneChangeOnCollision : MonoBehaviour
                 data.posY = 2.77f;
                 data.checkpointX = -6.35f;
                 data.checkpointY = 2.77f;
+
+                SaveSystem.Save(data);
             }
             else if (sceneToLoad == "Level3")
             {
@@ -25,13 +27,13 @@ public class SceneChangeOnCollision : MonoBehaviour
                 data.posY = -2.24f;
                 data.checkpointX = -8.03f;
                 data.checkpointY = -2.24f;
+
+                SaveSystem.Save(data);
             }
             else if (sceneToLoad == "EndScreen")
             {
                 SaveSystem.Delete();
             }
-            
-            SaveSystem.Save(data);
 
             SceneManager.LoadScene(sceneToLoad);
         }
