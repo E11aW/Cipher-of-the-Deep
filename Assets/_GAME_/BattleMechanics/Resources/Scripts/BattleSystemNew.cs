@@ -61,18 +61,21 @@ public class BattleSystemNew : MonoBehaviour
     IEnumerator PlayerAttack()
     {
         float roll = Random.Range(0f, 1f);
+        int chargeChanceBonus = 1;
+        if (playerUnit.isCharged)
+        {
+            chargeChanceBonus = 2;
+        }
 
-        if (roll > playerUnit.missChance)
+        if (roll > playerUnit.missChance * chargeChanceBonus)
         {
             int damage = playerUnit.damage;
-            int critBonus = 1;
-            
+
             if (playerUnit.isCharged)
             {
                 dialogueText.text = "You hit extra hard!";
 
-                damage = playerUnit.chargeDamage;
-                critBonus = 2;
+                damage += playerUnit.chargeDamage;
 
                 yield return new WaitForSeconds(1f);
 
@@ -81,7 +84,7 @@ public class BattleSystemNew : MonoBehaviour
 
             roll = Random.Range(0f, 1f);
 
-            if (roll <= playerUnit.critChance * critBonus)
+            if (roll <= playerUnit.critChance * chargeChanceBonus)
             {
                 damage *= playerUnit.critMultiplier;
 
@@ -148,18 +151,22 @@ public class BattleSystemNew : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         float roll = Random.Range(0f, 1f);
+        
+        int chargeChanceBonus = 1;
+        if (enemyUnit.isCharged)
+        {
+            chargeChanceBonus = 2;
+        }
 
-        if (roll > enemyUnit.missChance)
+        if (roll > enemyUnit.missChance * chargeChanceBonus)
         { 
             int damage = enemyUnit.damage;
-            int critBonus = 1;
             
             if (enemyUnit.isCharged)
             {
                 dialogueText.text = enemyUnit.unitName + " hit extra hard!";
 
-                damage = enemyUnit.chargeDamage;
-                critBonus = 2;
+                damage += enemyUnit.chargeDamage;
 
                 yield return new WaitForSeconds(1f);
 
@@ -168,7 +175,7 @@ public class BattleSystemNew : MonoBehaviour
 
             roll = Random.Range(0f, 1f);
 
-            if (roll <= enemyUnit.critChance * critBonus)
+            if (roll <= enemyUnit.critChance * chargeChanceBonus)
             {
                 damage *= enemyUnit.critMultiplier;
 
