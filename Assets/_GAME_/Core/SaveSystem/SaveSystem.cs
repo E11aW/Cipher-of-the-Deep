@@ -64,16 +64,26 @@ public static class SaveSystem
     }
 
     public static SaveData Load()
+{
+    try
     {
-        try
+        if (!File.Exists(SavePath))
         {
-            if (!File.Exists(SavePath)) return null;
-            var json = File.ReadAllText(SavePath);
-            var data = JsonUtility.FromJson<SaveData>(json);
+            Debug.Log("[SaveSystem] No save file found.");
+            return null;
+        }
 
-#if UNITY_EDITOR
-            Debug.Log($"[SaveSystem] Loaded: {SavePath}\n{json}");
-#endif
+        var json = File.ReadAllText(SavePath);
+
+        var data = JsonUtility.FromJson<SaveData>(json);
+        if (data == null)
+        {
+            Debug.LogWarning("[SaveSystem] Deserialization returned null. JSON may not match SaveData structure.");
+        }
+
+    #if UNITY_EDITOR
+            Debug.Log($"[SaveSystem] Loaded object: {data}");
+    #endif
 
             return data;
         }
@@ -83,6 +93,7 @@ public static class SaveSystem
             return null;
         }
     }
+
 
     public static void Delete()
     {

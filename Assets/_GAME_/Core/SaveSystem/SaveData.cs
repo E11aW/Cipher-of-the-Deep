@@ -10,6 +10,8 @@ public class SaveData
     // --- Player location ---
     public float posX;
     public float posY;
+    public float checkpointX;
+    public float checkpointY;
     public string scene;     // Optional: store current scene 
 
     // --- Player stats ---
@@ -24,6 +26,29 @@ public class SaveData
     public string[] openedChests; // Track all opened chests by ID
     public string version = "1.0.0";
     public string savedAtIsoUtc;
+
+    public SaveData()
+    {
+        // Load prefab from Resources (must be in a folder named "Resources")
+        var prefab = Resources.Load<GameObject>("Prefabs/Player");
+        if (prefab != null)
+        {
+            var defaults = prefab.GetComponent<Unit>();
+            if (defaults != null)
+            {
+                playerDamage = defaults.damage;
+                playerMaxHP = defaults.maxHP;
+                playerCurrentHP = defaults.currentHP;
+            }
+        }
+
+
+        // Hard coded start position
+        checkpointX = -4.11f;
+        checkpointY = -0.94f;
+        savedAtIsoUtc = DateTime.UtcNow.ToString("o");
+    }
+
 
     // Create new saves
     public static SaveData FromPosition(Vector2 pos, string sceneName = "")

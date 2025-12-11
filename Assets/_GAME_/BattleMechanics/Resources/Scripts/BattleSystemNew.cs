@@ -23,7 +23,7 @@ public class BattleSystemNew : MonoBehaviour
 
 
     public BattleState state;
-    void Start()
+    void Awake()
     {
         state = BattleState.START;
         StartCoroutine(SetupBattle());
@@ -35,12 +35,11 @@ public class BattleSystemNew : MonoBehaviour
         playerUnit = playerGO.GetComponent<Unit>();
 
         var data = SaveSystem.Load();
-        Debug.Log(data);
         if (data != null)
         {
             playerUnit.damage = data.playerDamage;
             playerUnit.maxHP = data.playerMaxHP;
-            playerUnit.currentHP = data.playerCurrentHP;
+            playerUnit.currentHP = data.playerCurrentHP;   
         }
 
         GameObject enemyGO = Instantiate(BattleManager.Instance.enemyPrefabToBattle, enemyBattleStation);
@@ -224,6 +223,7 @@ public class BattleSystemNew : MonoBehaviour
         if (state == BattleState.WON && !string.IsNullOrEmpty(enemyUnit.currentEnemyID))
         {
             data.AddDefeatedEnemy(enemyUnit.currentEnemyID);
+            data.playerCurrentHP = playerUnit.currentHP;
         }
 
         SaveSystem.Save(data);
